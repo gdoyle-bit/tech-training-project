@@ -14,3 +14,84 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+
+model User {
+  UserId         Int      @id @default(autoincrement())
+  ClerkId        String   @unique @db.VarChar(255)
+  UserName       String?  @unique @db.VarChar(45)
+  Email          String   @unique @db.VarChar(255)
+  FirstName      String?  @db.VarChar(45)
+  LastName       String?  @db.VarChar(45)
+  IsAnonymous    Boolean  @default(false)
+  LastActivityAt DateTime @default(now())
+
+  Recipes Recipe[]
+
+  @@map("users")
+}
+
+model Recipe {
+  RecipeId  Int      @id @default(autoincrement())
+  UserId    Int
+  Title     String   @db.VarChar(255)
+  Photo     String?
+  PrepTime  Int?
+  Yield     Int?
+  TimeStamp DateTime @default(now())
+  Comments  String?
+
+  User             User             @relation(fields: [UserId], references: [UserId])
+  Ingredients      Ingredient[]
+  Directions       Direction[]
+  RecipeCategories RecipeCategory[]
+
+  @@map("recipes")
+}
+
+model Category {
+  CategoryId  Int     @id @default(autoincrement())
+  Name        String  @unique @db.VarChar(50)
+  Description String? @db.VarChar(255)
+
+  RecipeCategories RecipeCategory[]
+
+  @@map("categories")
+}
+
+model RecipeCategory {
+  RecipeId   Int
+  CategoryId Int
+
+  Recipe   Recipe   @relation(fields: [RecipeId], references: [RecipeId], onDelete: Cascade)
+  Category Category @relation(fields: [CategoryId], references: [CategoryId], onDelete: Cascade)
+
+  @@id([RecipeId, CategoryId])
+  @@map("recipe_categories")
+}
+
+model Ingredient {
+  IngredientId    Int      @id @default(autoincrement())
+  RecipeId        Int
+  IngredientOrder Int
+  Name            String   @db.VarChar(100)
+  Quantity        Decimal? @db.Decimal(8, 2)
+  Unit            String?  @db.VarChar(30)
+  Notes           String?  @db.VarChar(255)
+
+  Recipe Recipe @relation(fields: [RecipeId], references: [RecipeId], onDelete: Cascade)
+
+  @@unique([RecipeId, IngredientOrder])
+  @@map("ingredients")
+}
+
+model Direction {
+  DirectionId Int    @id @default(autoincrement())
+  RecipeId    Int
+  StepNumber  Int
+  Instruction String
+
+  Recipe Recipe @relation(fields: [RecipeId], references: [RecipeId], onDelete: Cascade)
+
+  @@unique([RecipeId, StepNumber])
+  @@map("directions")
+}
