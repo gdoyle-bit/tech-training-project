@@ -3,23 +3,27 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "rootDir": ".",
-    "outDir": "./dist",
 
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
 
     "types": ["node"],
-    "sourceMap": true
+
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
+
   "include": [
-    "src/**/*.ts",
     "app.ts",
-    "prisma.config.ts"
+    "src/**/*.ts",
+    "prisma/**/*.ts"
   ],
+
   "exclude": [
-    "node_modules",
-    "dist"
+    "node_modules"
   ]
 }

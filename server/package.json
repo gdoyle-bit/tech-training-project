@@ -7,10 +7,11 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "node app.ts",
-    "test": "node app.ts",
-    "seed": "tsx prisma/seed.ts"
-  },
+  "dev": "tsx app.ts",
+  "typecheck": "tsc --noEmit",
+  "seed": "tsx prisma/seed.ts",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
   "dependencies": {
     "@prisma/client": "^6.12.0",
     "cors": "^2.8.6",
