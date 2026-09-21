@@ -1,7 +1,15 @@
 import { Outlet } from "react-router-dom";
 
+import Navigation from "./components/Navigation";
+
 function App() {
-  return <Outlet />;
+  return (
+    <>
+      <Navigation />
+
+      <Outlet />
+    </>
+  );
 }
 
 export default App;

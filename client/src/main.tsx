@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
-  Navigate,
   RouterProvider,
 } from "react-router-dom";
 
@@ -10,7 +9,8 @@ import App from "./App";
 import RecipeListPage from "./pages/RecipeListPage";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
 import CategoryListPage from "./pages/CategoryListPage";
-import CategoryRecipesPage from "./pages/CategoryRecipesPage";
+import CategoryRecipesPage from "./pages/CategoryRecipesPage.tsx";
+import HomePage from "./pages/HomePage";
 
 import "./index.css";
 
@@ -19,9 +19,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-  {
-    index: true,
-    element: <Navigate to="/recipes" replace />,
+  { index: true, element: <HomePage />, 
   },
   {
     path: "recipes",

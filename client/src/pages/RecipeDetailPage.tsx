@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { getRecipeById } from "../api/recipes";
+import CategoryBadge from "../components/CategoryBadge";
+import IngredientList from "../components/IngredientList";
+import DirectionsList from "../components/DirectionsList";
 import type { RecipeDetail } from "../types/recipe";
+
 
 export default function RecipeDetailPage() {
   const { id } = useParams();
@@ -83,43 +87,18 @@ export default function RecipeDetailPage() {
 
       <div>
         {recipe.RecipeCategories.map(({ Category }) => (
-          <Link
+          <CategoryBadge
             key={Category.CategoryId}
-            to={`/categories/${Category.CategoryId}`}
-          >
-            {Category.Name}{" "}
-          </Link>
+            category={Category}
+          />
         ))}
       </div>
 
       {recipe.Comments && <p>{recipe.Comments}</p>}
 
-      <section>
-        <h2>Ingredients</h2>
+      <IngredientList ingredients={recipe.Ingredients} />
 
-        <ul>
-          {recipe.Ingredients.map((ingredient) => (
-            <li key={ingredient.IngredientId}>
-              {ingredient.Quantity && `${ingredient.Quantity} `}
-              {ingredient.Unit && `${ingredient.Unit} `}
-              {ingredient.Name}
-              {ingredient.Notes && ` (${ingredient.Notes})`}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <h2>Directions</h2>
-
-        <ol>
-          {recipe.Directions.map((direction) => (
-            <li key={direction.DirectionId}>
-              {direction.Instruction}
-            </li>
-          ))}
-        </ol>
-      </section>
+      <DirectionsList directions={recipe.Directions} />
     </main>
   );
 }
