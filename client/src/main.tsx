@@ -9,6 +9,8 @@ import {
 import App from "./App";
 import RecipeListPage from "./pages/RecipeListPage";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
+import CategoryListPage from "./pages/CategoryListPage";
+import CategoryRecipesPage from "./pages/CategoryRecipesPage";
 
 import "./index.css";
 
@@ -17,19 +19,27 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      {
-        index: true,
-        element: <Navigate to="/recipes" replace />,
-      },
-      {
-        path: "recipes",
-        element: <RecipeListPage />,
-      },
-      {
-        path: "recipes/:id",
-        element: <RecipeDetailPage />,
-      },
-    ],
+  {
+    index: true,
+    element: <Navigate to="/recipes" replace />,
+  },
+  {
+    path: "recipes",
+    element: <RecipeListPage />,
+  },
+  {
+    path: "recipes/:id",
+    element: <RecipeDetailPage />,
+  },
+  {
+    path: "categories",
+    element: <CategoryListPage />,
+  },
+  {
+    path: "categories/:id",
+    element: <CategoryRecipesPage />,
+  },
+],
   },
 ]);
 

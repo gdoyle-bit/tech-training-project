@@ -66,9 +66,12 @@ export default function RecipeListPage() {
 
               <div>
                 {recipe.RecipeCategories.map(({ Category }) => (
-                  <span key={Category.CategoryId}>
+                  <Link
+                    key={Category.CategoryId}
+                    to={`/categories/${Category.CategoryId}`}
+                  >
                     {Category.Name}{" "}
-                  </span>
+                  </Link>
                 ))}
               </div>
             </article>
