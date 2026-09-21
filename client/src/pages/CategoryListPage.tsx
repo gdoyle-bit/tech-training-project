@@ -43,14 +43,17 @@ export default function CategoryListPage() {
         <ul>
           {categories.map((category) => (
             <li key={category.CategoryId}>
-              <Link to={`/categories/${category.CategoryId}`}>
-                {category.Name}
-              </Link>
+            <Link to={`/categories/${category.CategoryId}`}>
+              {category.Name}
+            </Link>
 
-              {category.Description && (
-                <p>{category.Description}</p>
-              )}
-            </li>
+            {category.Description && <p>{category.Description}</p>}
+
+            <p>
+              {category._count?.RecipeCategories ?? 0}{" "}
+              {category._count?.RecipeCategories === 1 ? "recipe" : "recipes"}
+            </p>
+          </li>
           ))}
         </ul>
       )}

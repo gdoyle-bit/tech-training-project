@@ -98,7 +98,10 @@ async function main() {
       data: {
         UserId: user.UserId,
         Title: "Classic Pancakes",
-        PrepTime: 20,
+        Description:
+          "Light and fluffy homemade pancakes perfect for breakfast.",
+        PrepTime: 10,
+        CookTime: 10,
         Yield: 4,
         Comments: "Simple fluffy pancakes for breakfast.",
 
@@ -170,8 +173,21 @@ async function main() {
 
     console.log("Classic Pancakes recipe seeded successfully.");
   } else {
-    console.log("Classic Pancakes already exists. Skipping.");
-  }
+  await prisma.recipe.update({
+    where: {
+      RecipeId: existingRecipe.RecipeId,
+    },
+    data: {
+      Description:
+        "Light and fluffy homemade pancakes perfect for breakfast.",
+      PrepTime: 10,
+      CookTime: 10,
+      Yield: 4,
+    },
+  });
+
+  console.log("Classic Pancakes updated successfully.");
+}
 }
 
 main()

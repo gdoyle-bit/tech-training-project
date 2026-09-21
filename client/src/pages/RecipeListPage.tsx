@@ -60,6 +60,10 @@ export default function RecipeListPage() {
                 <p>Prep time: {recipe.PrepTime} minutes</p>
               )}
 
+              {recipe.CookTime !== null && (
+                <p>Cook time: {recipe.CookTime} minutes</p>
+              )}
+
               {recipe.Yield !== null && (
                 <p>Servings: {recipe.Yield}</p>
               )}

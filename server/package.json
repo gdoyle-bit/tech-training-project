@@ -10,8 +10,11 @@
   "dev": "tsx app.ts",
   "typecheck": "tsc --noEmit",
   "seed": "tsx prisma/seed.ts",
-  "test": "echo \"Error: no test specified\" && exit 1"
-},
+  "prisma:format": "prisma format",
+  "prisma:validate": "prisma validate",
+  "prisma:migrate": "prisma migrate dev",
+  "prisma:generate": "prisma generate"
+  },
   "dependencies": {
     "@prisma/client": "^6.12.0",
     "cors": "^2.8.6",

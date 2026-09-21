@@ -67,8 +67,14 @@ export default function RecipeDetailPage() {
           }`.trim()}
       </p>
 
+      {recipe.Description && <p>{recipe.Description}</p>}
+
       {recipe.PrepTime !== null && (
         <p>Prep time: {recipe.PrepTime} minutes</p>
+      )}
+
+      {recipe.CookTime !== null && (
+        <p>Cook time: {recipe.CookTime} minutes</p>
       )}
 
       {recipe.Yield !== null && (

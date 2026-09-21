@@ -7,6 +7,13 @@ export async function getCategories(
 ): Promise<void> {
   try {
     const categories = await prisma.category.findMany({
+      include: {
+        _count: {
+          select: {
+            RecipeCategories: true,
+          },
+        },
+      },
       orderBy: {
         Name: "asc",
       },
@@ -15,10 +22,7 @@ export async function getCategories(
     res.status(200).json(categories);
   } catch (error) {
     console.error("Failed to get categories:", error);
-
-    res.status(500).json({
-      message: "Failed to get categories.",
-    });
+    res.status(500).json({ message: "Failed to get categories." });
   }
 }
 

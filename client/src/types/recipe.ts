@@ -9,6 +9,9 @@ export interface Category {
   CategoryId: number;
   Name: string;
   Description: string | null;
+  _count?: {
+    RecipeCategories: number;
+  };
 }
 
 export interface RecipeCategory {
@@ -38,12 +41,13 @@ export interface Recipe {
   RecipeId: number;
   UserId: number;
   Title: string;
+  Description: string | null;
   Photo: string | null;
   PrepTime: number | null;
+  CookTime: number | null;
   Yield: number | null;
   TimeStamp: string;
   Comments: string | null;
-
   User: User;
   RecipeCategories: RecipeCategory[];
 }

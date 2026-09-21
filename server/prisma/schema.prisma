@@ -31,14 +31,16 @@ model User {
 }
 
 model Recipe {
-  RecipeId  Int      @id @default(autoincrement())
-  UserId    Int
-  Title     String   @db.VarChar(255)
-  Photo     String?
-  PrepTime  Int?
-  Yield     Int?
-  TimeStamp DateTime @default(now())
-  Comments  String?
+  RecipeId    Int      @id @default(autoincrement())
+  UserId      Int
+  Title       String   @db.VarChar(255)
+  Description String?
+  Photo       String?
+  PrepTime    Int?
+  CookTime    Int?
+  Yield       Int?
+  TimeStamp   DateTime @default(now())
+  Comments    String?
 
   User             User             @relation(fields: [UserId], references: [UserId])
   Ingredients      Ingredient[]
