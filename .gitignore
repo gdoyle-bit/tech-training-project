@@ -24,3 +24,8 @@ project-checklist.md
 *.sln
 *.sw?
 *.npmrc
+
+# Environment variables
+.env
+.env.*
+!.env.example
