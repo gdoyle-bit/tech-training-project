@@ -9,6 +9,7 @@ import cors from "cors";
 
 import recipeRoutes from "./src/routes/recipeRoutes.ts";
 import categoryRoutes from "./src/routes/categoryRoutes.ts";
+import { clerkMiddleware } from "@clerk/express";
 
 const app: Express = express();
 
@@ -23,6 +24,8 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use(clerkMiddleware());
 
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/categories", categoryRoutes);

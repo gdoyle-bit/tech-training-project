@@ -11,6 +11,7 @@ import RecipeDetailPage from "./pages/RecipeDetailPage";
 import CategoryListPage from "./pages/CategoryListPage";
 import CategoryRecipesPage from "./pages/CategoryRecipesPage.tsx";
 import HomePage from "./pages/HomePage";
+import { ClerkProvider } from "@clerk/react";
 
 import "./index.css";
 
@@ -43,6 +44,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+    <ClerkProvider>
+      <RouterProvider router={router} />
+    </ClerkProvider>
+  </StrictMode>,
 );

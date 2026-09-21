@@ -1,3 +1,9 @@
+import {
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/react";
 import { Link } from "react-router-dom";
 
 export default function Navigation() {
@@ -5,7 +11,16 @@ export default function Navigation() {
     <nav>
       <Link to="/">Recipe Manager</Link>{" "}
       <Link to="/recipes">Recipes</Link>{" "}
-      <Link to="/categories">Categories</Link>
+      <Link to="/categories">Categories</Link>{" "}
+
+      <Show when="signed-out">
+        <SignInButton />{" "}
+        <SignUpButton />
+      </Show>
+
+      <Show when="signed-in">
+        <UserButton />
+      </Show>
     </nav>
   );
 }
