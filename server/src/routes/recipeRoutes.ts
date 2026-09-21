@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { getRecipes } from "../controllers/recipeController.ts";
-
-// console.log("recipeRoutes.ts loaded");
+import {
+  getRecipes,
+  getRecipeById,
+} from "../controllers/recipeController.ts";
 
 const router = Router();
 
 router.get("/", getRecipes);
-
-// console.log("GET / registered on recipe router");
+router.get("/:id", getRecipeById);
 
 export default router;
