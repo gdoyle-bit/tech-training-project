@@ -12,6 +12,8 @@ import CategoryListPage from "./pages/CategoryListPage";
 import CategoryRecipesPage from "./pages/CategoryRecipesPage.tsx";
 import HomePage from "./pages/HomePage";
 import { ClerkProvider } from "@clerk/react";
+import DashboardPage from "./pages/DashboardPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import "./index.css";
 
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
   {
     path: "categories/:id",
     element: <CategoryRecipesPage />,
+  },
+  {
+    path: "dashboard",
+    element: (
+      <ProtectedRoute>
+        <DashboardPage />
+      </ProtectedRoute>
+    ),
   },
 ],
   },

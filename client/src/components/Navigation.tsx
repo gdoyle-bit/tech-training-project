@@ -19,6 +19,7 @@ export default function Navigation() {
       </Show>
 
       <Show when="signed-in">
+        <Link to="/dashboard">Dashboard</Link>{" "}
         <UserButton />
       </Show>
     </nav>
