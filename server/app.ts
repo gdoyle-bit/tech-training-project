@@ -9,7 +9,8 @@ import cors from "cors";
 
 import recipeRoutes from "./src/routes/recipeRoutes.ts";
 import categoryRoutes from "./src/routes/categoryRoutes.ts";
-import { clerkMiddleware } from "@clerk/express";
+import userRoutes from "./src/routes/userRoutes.ts";
+import {clerkMiddleware} from "@clerk/express";
 
 const app: Express = express();
 
@@ -29,6 +30,7 @@ app.use(clerkMiddleware());
 
 app.use("/api/recipes", recipeRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/users", userRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Recipe Manager API is running!");
