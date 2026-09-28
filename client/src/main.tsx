@@ -9,10 +9,12 @@ import App from "./App";
 import RecipeListPage from "./pages/RecipeListPage";
 import RecipeDetailPage from "./pages/RecipeDetailPage";
 import CategoryListPage from "./pages/CategoryListPage";
-import CategoryRecipesPage from "./pages/CategoryRecipesPage.tsx";
+import CategoryRecipesPage from "./pages/CategoryRecipesPage";
 import HomePage from "./pages/HomePage";
-import { ClerkProvider } from "@clerk/react";
 import DashboardPage from "./pages/DashboardPage";
+import CreateRecipePage from "./pages/CreateRecipePage";
+
+import { ClerkProvider } from "@clerk/react";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import "./index.css";
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
   {
     path: "categories/:id",
     element: <CategoryRecipesPage />,
+  },
+  {
+    path: "recipes/new",
+    element: (
+      <ProtectedRoute>
+        <CreateRecipePage />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "dashboard",
