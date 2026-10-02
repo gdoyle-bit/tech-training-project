@@ -7,7 +7,6 @@ import IngredientList from "../components/IngredientList";
 import DirectionsList from "../components/DirectionsList";
 import type { RecipeDetail } from "../types/recipe";
 
-
 export default function RecipeDetailPage() {
   const { id } = useParams();
 
@@ -34,7 +33,7 @@ export default function RecipeDetailPage() {
         setError(
           error instanceof Error
             ? error.message
-            : "Unable to load recipe."
+            : "Unable to load recipe.",
         );
       } finally {
         setLoading(false);
@@ -57,19 +56,21 @@ export default function RecipeDetailPage() {
     );
   }
 
+  const fullName =
+    `${recipe.User.FirstName ?? ""} ${recipe.User.LastName ?? ""}`.trim();
+
+  const creatorName =
+    recipe.User.UserName ||
+    fullName ||
+    recipe.User.Email;
+
   return (
     <main>
       <Link to="/recipes">← Back to recipes</Link>
 
       <h1>{recipe.Title}</h1>
 
-      <p>
-        By{" "}
-        {recipe.User.UserName ??
-          `${recipe.User.FirstName ?? ""} ${
-            recipe.User.LastName ?? ""
-          }`.trim()}
-      </p>
+      <p>By {creatorName}</p>
 
       {recipe.Description && <p>{recipe.Description}</p>}
 

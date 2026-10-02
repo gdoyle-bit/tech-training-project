@@ -1,6 +1,7 @@
 export interface User {
   UserId: number;
   UserName: string | null;
+  Email: string;
   FirstName: string | null;
   LastName: string | null;
 }
