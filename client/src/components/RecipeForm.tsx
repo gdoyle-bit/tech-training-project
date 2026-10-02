@@ -1,5 +1,8 @@
 import { useState, type SyntheticEvent } from "react";
-import type { Category } from "../types/recipe";
+import type {
+  Category,
+  CreateRecipeRequest,
+} from "../types/recipe";
 
 interface IngredientFormData {
   name: string;
@@ -14,10 +17,14 @@ interface DirectionFormData {
 
 interface RecipeFormProps {
   categories: Category[];
+  onSubmit: (recipe: CreateRecipeRequest) => Promise<void>;
+  submitting: boolean;
 }
 
 export default function RecipeForm({
   categories,
+  onSubmit,
+  submitting,
 }: RecipeFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -117,20 +124,37 @@ export default function RecipeForm({
     );
     }
 
-  function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
-    event.preventDefault();
+    async function handleSubmit(
+      event: SyntheticEvent<HTMLFormElement>,
+    ) {
+      event.preventDefault();
 
-    console.log({
-    title,
-    description,
-    prepTime,
-    cookTime,
-    servings,
-    ingredients,
-    directions,
-    selectedCategoryIds,
-    });
-  }
+      const recipe: CreateRecipeRequest = {
+        title: title.trim(),
+        description: description.trim() || null,
+        prepTime: prepTime === "" ? null : Number(prepTime),
+        cookTime: cookTime === "" ? null : Number(cookTime),
+        servings: servings === "" ? null : Number(servings),
+
+        ingredients: ingredients.map((ingredient) => ({
+          name: ingredient.name.trim(),
+          quantity:
+            ingredient.quantity === ""
+              ? null
+              : Number(ingredient.quantity),
+          unit: ingredient.unit.trim() || null,
+          notes: ingredient.notes.trim() || null,
+        })),
+
+        directions: directions.map((direction) => ({
+          instruction: direction.instruction.trim(),
+        })),
+
+        categoryIds: selectedCategoryIds,
+      };
+
+      await onSubmit(recipe);
+    }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -327,7 +351,9 @@ export default function RecipeForm({
     ))}
     </fieldset>
 
-      <button type="submit">Create Recipe</button>
+      <button type="submit" disabled={submitting}>
+        {submitting ? "Creating Recipe..." : "Create Recipe"}
+      </button>
     </form>
   );
 }

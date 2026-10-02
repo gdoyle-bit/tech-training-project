@@ -1,4 +1,9 @@
-import type { Recipe, RecipeDetail } from "../types/recipe";
+import type {
+  CreatedRecipe,
+  CreateRecipeRequest,
+  Recipe,
+  RecipeDetail,
+} from "../types/recipe";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -25,6 +30,30 @@ export async function getRecipeById(
     }
 
     throw new Error("Failed to fetch recipe.");
+  }
+
+  return response.json();
+}
+
+export async function createRecipe(
+  token: string,
+  recipe: CreateRecipeRequest,
+): Promise<CreatedRecipe> {
+  const response = await fetch(`${API_URL}/api/recipes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(recipe),
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => null);
+
+    throw new Error(
+      data?.message ?? "Failed to create recipe.",
+    );
   }
 
   return response.json();
